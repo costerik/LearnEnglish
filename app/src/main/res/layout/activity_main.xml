@@ -19,7 +19,7 @@
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/email"
             android:hint="@string/email"
             android:textColorHint="@color/primary"
             android:textColor="@color/primary"
@@ -43,6 +43,7 @@
         android:layout_height="match_parent"
         android:gravity="bottom">
         <Button
+            android:id="@+id/log_in"
             android:text="@string/log_in"
             android:background="@color/primary"
             android:textColor="@color/icons"

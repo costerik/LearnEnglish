@@ -20,7 +20,7 @@ public class splash_screen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         viewSplash=(ImageView)findViewById(R.id.view_splash);
 
-        Bitmap bm = decodeSampledBitmapFromResource(getResources(),R.drawable.splash_screen,500,500);
+        Bitmap bm = decodeSampledBitmapFromResource(getResources(),R.drawable.splash_screen,300,300);
         BitmapDrawable d=new BitmapDrawable(getResources(),bm);
         viewSplash.setBackground(d);
 
