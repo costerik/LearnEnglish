@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         edt_email=(EditText)findViewById(R.id.email);
         edt_password=(EditText)findViewById(R.id.password);
         btn_log_in=(Button)findViewById(R.id.log_in);
+        btnStudent=(Button)findViewById(R.id.button_student);
 
         btn_log_in.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,13 +45,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*btnStudent.setOnClickListener(new View.OnClickListener() {
+        btnStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent student=new Intent(MainActivity.this,StudentView.class);
                 startActivity(student);
             }
-        });*/
+        });
     }
 
     private class GetData extends AsyncTask<Void,Void,Void> {
@@ -103,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
                 i.putExtra(NAME,user.getString("name"));
                 i.putExtra(LAST_NAME,user.getString("lastname"));
                 startActivity(i);
-                finish();
             }else{
                 Toast.makeText(getApplicationContext(),"email or password invalid",Toast.LENGTH_SHORT).show();
             }
