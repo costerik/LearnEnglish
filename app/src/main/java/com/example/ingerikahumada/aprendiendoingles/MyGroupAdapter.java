@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.parse.ParseObject;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 /**
  * Created by Ing. Erik Ahumada on 20/11/2015.
@@ -30,7 +31,7 @@ public class MyGroupAdapter extends RecyclerView.Adapter<MyGroupAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.bindTextView(mDataset.get(position).getString("name"));
+        holder.bindTextView(mDataset.get(position));
     }
 
     @Override
@@ -40,15 +41,19 @@ public class MyGroupAdapter extends RecyclerView.Adapter<MyGroupAdapter.ViewHold
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView mTextView;
+        private TextView mTextView,mTextViewProfessor,mTextViewLetter;
 
         public ViewHolder(View v){
             super(v);
-            mTextView=(TextView)v.findViewById(R.id.my_text);
+            mTextView=(TextView)v.findViewById(R.id.group_cardview);
+            mTextViewProfessor=(TextView)v.findViewById(R.id.professor_cardview);
+            mTextViewLetter=(TextView)v.findViewById(R.id.letter_cardview);
         }
 
-        public void bindTextView(String data){
-            this.mTextView.setText(this.mTextView.getText().toString()+" "+data);
+        public void bindTextView(ParseObject data){
+            this.mTextView.setText(data.getString("name"));
+            //this.mTextViewProfessor.setText(data.getString("user_id"));
+            this.mTextViewLetter.setText(data.getString("letters"));
         }
 
     }
