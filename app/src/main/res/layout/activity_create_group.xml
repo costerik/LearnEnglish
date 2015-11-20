@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.ingerikahumada.aprendiendoingles.ProfessorView">
+    tools:context="com.example.ingerikahumada.aprendiendoingles.CreateGroup">
 
     <LinearLayout
         android:background="@color/primary"
@@ -17,12 +16,11 @@
             android:id="@+id/avatar_professor"
             android:layout_margin="5dp"
             android:background="@drawable/user_view_circle"
-            android:src="@drawable/user"
+            android:src="@drawable/group_tree"
             android:layout_width="150dp"
             android:layout_height="150dp" />
         <TextView
-            android:id="@+id/text_name_profesor"
-            android:text="@string/profesor"
+            android:text="@string/group"
             android:textColor="@color/icons"
             android:textStyle="bold"
             android:layout_width="wrap_content"
@@ -32,19 +30,38 @@
     <LinearLayout
         android:id="@+id/layout_empty_state"
         android:padding="16dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/lista_recycle"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2" />
+            android:orientation="vertical"
+            android:layout_weight="2"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/group_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/group_name"
+                android:textColorHint="@color/primary"
+                android:textColor="@color/primary"
+                android:theme="@style/MyEditTextStyle"/>
+            <EditText
+                android:id="@+id/initial_letter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/initial_letter"
+                android:textColorHint="@color/primary"
+                android:textColor="@color/primary"
+                android:theme="@style/MyEditTextStyle"/>
+        </LinearLayout>
 
         <Button
-            android:id="@+id/button_create_group"
-            android:text="@string/create_group"
+            android:id="@+id/button_create"
+            android:text="@string/create"
             android:background="@color/primary"
             android:textColor="@color/icons"
             android:layout_width="match_parent"
