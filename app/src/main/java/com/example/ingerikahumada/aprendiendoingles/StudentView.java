@@ -15,9 +15,10 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
-public class StudentView extends AppCompatActivity {
+public class StudentView extends AppCompatActivity{
 
     private RecyclerView recyclerListaStudent;
     private MyGroupAdapter mAdapter;
@@ -38,6 +39,7 @@ public class StudentView extends AppCompatActivity {
 
     @Override
     public void onResume(){
+        Log.d("STUDENT VIEW","ONRESUME");
         super.onResume();
         new GetData().execute();
     }
@@ -63,7 +65,8 @@ public class StudentView extends AppCompatActivity {
                 for (ParseObject dato : ob){
                     values.add(dato);
                 }
-                Log.d("GETDATA", "" + query.count());
+
+                Log.d("GETDATASTUDENTVIEW", "" + query.count());
             } catch (com.parse.ParseException e) {
                 Log.e("Error",e.getMessage());
                 e.printStackTrace();

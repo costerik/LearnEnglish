@@ -96,13 +96,13 @@ public class ProfessorView extends AppCompatActivity{
                 ParseQuery<ParseObject> query=new ParseQuery<ParseObject>("Group");
                 ob=query.find();
                 for (ParseObject dato : ob){
-                    Log.d("RESULT",this.id+" "+dato.getObjectId());
-                    if(dato.getString("user_id").compareTo(this.id)==0){
+                    Log.d("RESULT",this.id+" "+dato.getParseObject("createdBy").getObjectId());
+                    if(dato.getParseObject("createdBy").getObjectId().compareTo(this.id)==0){
                         Log.d("MATCH","GROUP");
                         values.add(dato);
                     }
                 }
-                Log.d("GETDATA", "" + query.count());
+                Log.d("GETDATAPROFESSOR", "" + query.count());
             } catch (com.parse.ParseException e) {
                 Log.e("Error",e.getMessage());
                 e.printStackTrace();
@@ -124,6 +124,5 @@ public class ProfessorView extends AppCompatActivity{
             pDialog.dismiss();
         }
     }
-
 
 }

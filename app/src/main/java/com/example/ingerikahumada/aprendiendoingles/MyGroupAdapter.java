@@ -5,12 +5,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.parse.ParseException;
 import com.parse.ParseObject;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 /**
  * Created by Ing. Erik Ahumada on 20/11/2015.
@@ -40,11 +42,13 @@ public class MyGroupAdapter extends RecyclerView.Adapter<MyGroupAdapter.ViewHold
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView mTextView,mTextViewProfessor,mTextViewLetter;
 
         public ViewHolder(View v){
             super(v);
+            v.setOnClickListener(this);
             mTextView=(TextView)v.findViewById(R.id.group_cardview);
             mTextViewProfessor=(TextView)v.findViewById(R.id.professor_cardview);
             mTextViewLetter=(TextView)v.findViewById(R.id.letter_cardview);
@@ -52,9 +56,19 @@ public class MyGroupAdapter extends RecyclerView.Adapter<MyGroupAdapter.ViewHold
 
         public void bindTextView(ParseObject data){
             this.mTextView.setText(data.getString("name"));
-            //this.mTextViewProfessor.setText(data.getString("user_id"));
+            Log.d("RES", data.getParseObject("createdBy").getObjectId());
+            try {
+                this.mTextViewProfessor.setText(data.getParseObject("createdBy").fetchIfNeeded().get("name").toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             this.mTextViewLetter.setText(data.getString("letters"));
         }
 
+        @Override
+        public void onClick(View v) {
+            Log.d("VIEWHOLDER",mDataset.get(getPosition()).getString("name"));
+            Toast.makeText(v.getContext(),mDataset.get(getPosition()).getString("name"),Toast.LENGTH_SHORT).show();
+        }
     }
 }

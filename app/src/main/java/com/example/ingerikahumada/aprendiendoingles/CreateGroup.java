@@ -9,12 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 public class CreateGroup extends AppCompatActivity {
     private EditText groupName;
     private EditText initialLetter;
     private Button buttonCreate;
     private String id;
+    protected ParseObject user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +53,17 @@ public class CreateGroup extends AppCompatActivity {
         protected Void doInBackground(Void... params) {
             Log.d("CREATE GROUP",this.id+" "+this.nameGroup+" "+this.initialLetter);
             ParseObject testObject=new ParseObject("Group");
+            try{
+                ParseQuery<ParseObject> query=new ParseQuery<ParseObject>("User");
+                query.whereEqualTo("objectId",id);
+                user=query.getFirst();
+                Log.d("GETDATA",""+query.count()+" "+user.get("name"));
+            } catch (com.parse.ParseException e) {
+                Log.e("Error",e.getMessage());
+                e.printStackTrace();
+            }
             testObject.put("name",this.nameGroup);
-            testObject.put("user_id",this.id);
+            testObject.put("createdBy", user);
             testObject.put("letters",this.initialLetter);
             testObject.saveInBackground();
             return null;

@@ -20,9 +20,9 @@ public class splash_screen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         viewSplash=(ImageView)findViewById(R.id.view_splash);
 
-        Bitmap bm = decodeSampledBitmapFromResource(getResources(),R.drawable.splash_screen,300,300);
-        BitmapDrawable d=new BitmapDrawable(getResources(),bm);
-        viewSplash.setBackground(d);
+        //Bitmap bm = decodeSampledBitmapFromResource(getResources(),R.drawable.splash_screen,300,300);
+        //BitmapDrawable d=new BitmapDrawable(getResources(),bm);
+        //viewSplash.setBackground(d);
 
             new Handler().postDelayed(new Runnable() {
 
@@ -38,7 +38,7 @@ public class splash_screen extends AppCompatActivity {
 
                     finish();
                 }
-            }, 3000);
+            }, 2000);
 
     }
 
