@@ -35,8 +35,13 @@
             android:name=".CreateGroup"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".StudentView"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".StudentView"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".SlidesExam"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
 

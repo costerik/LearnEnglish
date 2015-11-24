@@ -1,6 +1,7 @@
 package com.example.ingerikahumada.aprendiendoingles;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
-public class StudentView extends AppCompatActivity{
+public class StudentView extends AppCompatActivity implements MyGroupAdapter.RecyclerClickListener{
 
     private RecyclerView recyclerListaStudent;
     private MyGroupAdapter mAdapter;
@@ -42,6 +43,13 @@ public class StudentView extends AppCompatActivity{
         Log.d("STUDENT VIEW","ONRESUME");
         super.onResume();
         new GetData().execute();
+    }
+
+    @Override
+    public void itemClick(ParseObject parseObjectAtPosition) {
+        Log.d("VIEWHOLDER", parseObjectAtPosition.getString("name"));
+        Intent i=new Intent(StudentView.this,SlidesExam.class);
+        startActivity(i);
     }
 
     private class GetData extends AsyncTask<Void,Void,Void> {
@@ -77,6 +85,7 @@ public class StudentView extends AppCompatActivity{
         @Override
         protected void onPostExecute(Void result){
             mAdapter=new MyGroupAdapter(values);
+            mAdapter.setRecyclerClickListener(StudentView.this);
             if(values.isEmpty()){
                 Bitmap bm=splash_screen.decodeSampledBitmapFromResource(getResources(),R.drawable.empty_state,400,400);
                 BitmapDrawable b=new BitmapDrawable(getResources(),bm);

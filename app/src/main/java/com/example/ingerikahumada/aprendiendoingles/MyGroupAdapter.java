@@ -1,5 +1,6 @@
 package com.example.ingerikahumada.aprendiendoingles;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,9 +20,18 @@ import java.util.ArrayList;
  */
 public class MyGroupAdapter extends RecyclerView.Adapter<MyGroupAdapter.ViewHolder> {
     ArrayList<ParseObject> mDataset;
+    private RecyclerClickListener mRecyclerClickListener;
 
     public MyGroupAdapter(ArrayList<ParseObject> dataset){
         this.mDataset=dataset;
+    }
+
+    public interface RecyclerClickListener{
+        void itemClick(ParseObject parseObjectAtPosition);
+    }
+
+    public void setRecyclerClickListener(RecyclerClickListener recyclerClickListener){
+        mRecyclerClickListener=recyclerClickListener;
     }
 
     @Override
@@ -67,8 +77,9 @@ public class MyGroupAdapter extends RecyclerView.Adapter<MyGroupAdapter.ViewHold
 
         @Override
         public void onClick(View v) {
-            Log.d("VIEWHOLDER",mDataset.get(getPosition()).getString("name"));
-            Toast.makeText(v.getContext(),mDataset.get(getPosition()).getString("name"),Toast.LENGTH_SHORT).show();
+            if (mRecyclerClickListener != null) {
+                mRecyclerClickListener.itemClick(mDataset.get(getPosition()));
+            }
         }
     }
 }
