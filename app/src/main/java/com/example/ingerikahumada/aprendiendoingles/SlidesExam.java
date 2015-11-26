@@ -1,6 +1,7 @@
 package com.example.ingerikahumada.aprendiendoingles;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
@@ -26,6 +27,9 @@ public class SlidesExam extends AppCompatActivity {
     protected ArrayList<ParseObject> values;
     private ViewPager viewPager;
     private String letters,idStudent,idGroup;
+    static String LETTERS="letters";
+    static String STUDENT_ID="studentID";
+    static String GROUP_ID="groupID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,7 @@ public class SlidesExam extends AppCompatActivity {
             letters=extras.getString(StudentView.LETTERS);
             idStudent=extras.getString(StudentView.STUDENT_ID);
             idGroup=extras.getString(StudentView.GROUP_ID);
-            Log.d("EXTRAS",letters+" "+idStudent+" "+idGroup);
+            Log.d("EXTRASLIDESEXAM",letters+" "+idStudent+" "+idGroup);
         }
 
         viewPager=(ViewPager)findViewById(R.id.view_pager);
@@ -49,7 +53,11 @@ public class SlidesExam extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                Intent i=new Intent(SlidesExam.this,Exam.class);
+                i.putExtra(LETTERS,letters);
+                i.putExtra(STUDENT_ID,idStudent);
+                i.putExtra(GROUP_ID,idGroup);
+                startActivity(i);
             }
         });
         new GetData().execute();

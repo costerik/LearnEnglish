@@ -43,6 +43,10 @@
             android:name=".SlidesExam"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity android:name=".Exam" >
+        </activity>
+        <activity android:name=".SignUp" >
+        </activity>
     </application>
 
 </manifest>

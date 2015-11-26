@@ -10,13 +10,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Button;
-
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
 
 public class StudentView extends AppCompatActivity implements MyGroupAdapter.RecyclerClickListener{

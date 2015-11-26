@@ -14,7 +14,17 @@
     <string name="student">Student</string>
     <string name="title_activity_slides_exam">SlidesExam</string>
     <string name="sign_up">sign up</string>
+    <string name="name">Name</string>
+    <string name="last_name">Lastname</string>
+    <string name="done">Done</string>
+
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string-array name="role">
+        <item>Professor</item>
+        <item>Student</item>
+    </string-array>
 </resources>
