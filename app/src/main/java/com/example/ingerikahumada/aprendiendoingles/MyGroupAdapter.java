@@ -68,7 +68,7 @@ public class MyGroupAdapter extends RecyclerView.Adapter<MyGroupAdapter.ViewHold
             this.mTextView.setText(data.getString("name"));
             Log.d("RES", data.getParseObject("createdBy").getObjectId());
             try {
-                this.mTextViewProfessor.setText(data.getParseObject("createdBy").fetchIfNeeded().get("name").toString());
+                this.mTextViewProfessor.setText(data.getParseObject("createdBy").fetchIfNeeded().get("name").toString()+" "+data.getParseObject("createdBy").fetchIfNeeded().get("lastname").toString());
             } catch (ParseException e) {
                 e.printStackTrace();
             }

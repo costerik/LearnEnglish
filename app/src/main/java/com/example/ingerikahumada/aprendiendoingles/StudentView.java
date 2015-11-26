@@ -27,10 +27,22 @@ public class StudentView extends AppCompatActivity implements MyGroupAdapter.Rec
     private ProgressDialog pDialog;
     private List<ParseObject> ob;
     protected ArrayList<ParseObject> values;
+    static String LETTERS="letters";
+    static String STUDENT_ID="studentId";
+    static String GROUP_ID="groupId";
+    String id,name,lastName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_view);
+
+        Bundle extras=getIntent().getExtras();
+        if(extras!=null){
+            id=extras.getString(MainActivity.ID);
+            name=extras.getString(MainActivity.NAME);
+            lastName=extras.getString(MainActivity.LAST_NAME);
+            Log.d("EXTRASTUDENTVIEW",id+" "+name+" "+lastName);
+        }
         recyclerListaStudent =(RecyclerView)findViewById(R.id.lista_recycle_student);
         recyclerListaStudent.setHasFixedSize(true);
 
@@ -48,7 +60,11 @@ public class StudentView extends AppCompatActivity implements MyGroupAdapter.Rec
     @Override
     public void itemClick(ParseObject parseObjectAtPosition) {
         Log.d("VIEWHOLDER", parseObjectAtPosition.getString("name"));
+
         Intent i=new Intent(StudentView.this,SlidesExam.class);
+        i.putExtra(LETTERS,parseObjectAtPosition.getString("letters"));
+        i.putExtra(STUDENT_ID,id);
+        i.putExtra(GROUP_ID,parseObjectAtPosition.getObjectId());
         startActivity(i);
     }
 

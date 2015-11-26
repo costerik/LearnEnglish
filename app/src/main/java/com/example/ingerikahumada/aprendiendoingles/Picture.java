@@ -18,18 +18,12 @@ import com.parse.ParseObject;
 
 
 public class Picture extends Fragment {
-    int color;
     private ImageView picture;
     private TextView word;
     private ParseObject data;
     private Bitmap bmp;
 
     public Picture() {
-    }
-
-    @SuppressLint("ValidFragment")
-    public Picture(int color) {
-        this.color = color;
     }
 
     @SuppressLint("ValidFragment")
@@ -44,15 +38,6 @@ public class Picture extends Fragment {
         try {
             bmp= BitmapFactory.decodeByteArray(picture.getData(), 0,
                     picture.getData().length);
-            if (bmp != null) {
-
-                Log.e("parse file ok", " null");
-                // img.setImageBitmap(Bitmap.createScaledBitmap(bmp,
-                // (display.getWidth() / 5),
-                // (display.getWidth() /50), false));
-                //img.setImageBitmap(getRoundedCornerBitmap(bmp, 10));
-                // img.setPadding(10, 10, 0, 0);
-            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -66,7 +51,6 @@ public class Picture extends Fragment {
         word.setText(data.getString("description"));
         if(bmp!=null)
             picture.setImageBitmap(bmp);
-
 
         return v;
     }

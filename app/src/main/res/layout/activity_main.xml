@@ -36,6 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:theme="@style/MyEditTextStyle"/>
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -43,6 +45,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="bottom">
+
+
         <Button
             android:id="@+id/log_in"
             android:text="@string/log_in"
@@ -51,12 +55,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"/>
+
         <Button
-            android:id="@+id/button_student"
+            android:id="@+id/button_sign_up"
             android:layout_marginTop="2dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/student"
+            android:text="@string/sign_up"
             android:background="@color/primary"
             android:textColor="@color/icons"/>
 

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btn_log_in,btnStudent;
+    private Button btn_log_in,btnSignUp;
     private EditText edt_email,edt_password;
     private List<ParseObject> ob;
     private ProgressDialog pDialog;
@@ -36,20 +36,24 @@ public class MainActivity extends AppCompatActivity {
         edt_email=(EditText)findViewById(R.id.email);
         edt_password=(EditText)findViewById(R.id.password);
         btn_log_in=(Button)findViewById(R.id.log_in);
-        btnStudent=(Button)findViewById(R.id.button_student);
+        btnSignUp=(Button)findViewById(R.id.button_sign_up);
 
         btn_log_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new GetData().execute();
+                if(edt_email.getText().toString().isEmpty() || edt_password.getText().toString().isEmpty()){
+                    Toast.makeText(getApplicationContext(),"One or more values are empty",Toast.LENGTH_SHORT).show();
+                }else {
+                    new GetData().execute();
+                }
             }
         });
 
-        btnStudent.setOnClickListener(new View.OnClickListener() {
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent student=new Intent(MainActivity.this,StudentView.class);
-                startActivity(student);
+                //Intent student=new Intent(MainActivity.this,StudentView.class);
+                //startActivity(student);
             }
         });
     }
@@ -81,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
             try{
                 ParseQuery<ParseObject> query=new ParseQuery<ParseObject>("User");
                 ob = query.find();
-                Log.d("GETDATA",""+query.count());
+                Log.d("GETDATA", "" + query.count());
             } catch (com.parse.ParseException e) {
                 Log.e("Error",e.getMessage());
                 e.printStackTrace();
@@ -98,12 +102,21 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if(user!=null){
-                Log.d("USER", "Entro");
-                Intent i=new Intent(MainActivity.this,ProfessorView.class);
-                i.putExtra(ID,user.getObjectId());
-                i.putExtra(NAME,user.getString("name"));
-                i.putExtra(LAST_NAME,user.getString("lastname"));
-                startActivity(i);
+                if(user.getString("role").compareTo("professor")==0) {
+                    Log.d("USER", "Entro");
+                    Intent i = new Intent(MainActivity.this, ProfessorView.class);
+                    i.putExtra(ID, user.getObjectId());
+                    i.putExtra(NAME, user.getString("name"));
+                    i.putExtra(LAST_NAME, user.getString("lastname"));
+                    startActivity(i);
+                }else{
+                    Log.d("STUDENT", "Entro");
+                    Intent i=new Intent(MainActivity.this,StudentView.class);
+                    i.putExtra(ID, user.getObjectId());
+                    i.putExtra(NAME, user.getString("name"));
+                    i.putExtra(LAST_NAME, user.getString("lastname"));
+                    startActivity(i);
+                }
             }else{
                 Toast.makeText(getApplicationContext(),"email or password invalid",Toast.LENGTH_SHORT).show();
             }

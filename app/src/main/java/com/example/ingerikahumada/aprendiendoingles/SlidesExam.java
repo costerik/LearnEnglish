@@ -25,6 +25,7 @@ public class SlidesExam extends AppCompatActivity {
     private List<ParseObject> ob;
     protected ArrayList<ParseObject> values;
     private ViewPager viewPager;
+    private String letters,idStudent,idGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,14 @@ public class SlidesExam extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Bundle extras=getIntent().getExtras();
+        if(extras!=null){
+            letters=extras.getString(StudentView.LETTERS);
+            idStudent=extras.getString(StudentView.STUDENT_ID);
+            idGroup=extras.getString(StudentView.GROUP_ID);
+            Log.d("EXTRAS",letters+" "+idStudent+" "+idGroup);
+        }
+
         viewPager=(ViewPager)findViewById(R.id.view_pager);
         viewPager.setPageTransformer(true,new ZoomOutPageTransformer());
 
@@ -40,8 +49,7 @@ public class SlidesExam extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                
             }
         });
         new GetData().execute();
@@ -77,7 +85,9 @@ public class SlidesExam extends AppCompatActivity {
                 ParseQuery<ParseObject> query=new ParseQuery<ParseObject>("Image");
                 ob=query.find();
                 for (ParseObject dato : ob){
-                    values.add(dato);
+                    if(dato.getString("description").substring(0,1).toUpperCase().compareTo(letters.toUpperCase())==0) {
+                        values.add(dato);
+                    }
                 }
 
                 Log.d("GETDATAIMAGES", "" + query.count());
@@ -90,7 +100,12 @@ public class SlidesExam extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void result){
-            setupViewPager(viewPager,values);
+            if(values.isEmpty()){
+                //viewPager.setBackground(getResources().getDrawable(R.drawable.empty_state,null));
+                viewPager.setBackgroundResource(R.drawable.empty_state);
+            }else {
+                setupViewPager(viewPager, values);
+            }
             pDialog.dismiss();
         }
     }
